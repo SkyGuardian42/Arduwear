@@ -1,9 +1,7 @@
   /*
 
- Heating Pad Hand Warmer Blanket Code Example
-  SparkFun Electronics, Pamela, 1/24/2013
-  Beerware License
-
+  Sample Code
+  
   Hardware Connections:
   -led1 = D9;
   -led2 = D10;
@@ -11,8 +9,6 @@
   -button = D2;
   -Mofset = D3;
 
-  Usage: 
-  Hit the switch to power, hit the button to adjust how warm the heating elements get, and three LEDs will indicate low, medium, and high levels. 
  */
 
 int btnPin = 2;
