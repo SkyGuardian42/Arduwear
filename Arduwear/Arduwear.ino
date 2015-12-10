@@ -1,30 +1,34 @@
   /*
 
- Heating Pad Hand Warmer Blanket Code Example
-  SparkFun Electronics, Pamela, 1/24/2013
-  Beerware License
-
-  Hardware Connections:
+  _Project Arduwear Sensor implementation
+  
+  Ports:
   -led1 = D9;
   -led2 = D10;
   -led3 = D11;
   -button = D2;
-  -Mofset = D3;
+  -Mosfet = D3;
+  -temp1 = A3;
+  -temp2 = A2;
 
-  Usage: 
-  Hit the switch to power, hit the button to adjust how warm the heating elements get, and three LEDs will indicate low, medium, and high levels. 
  */
 
 int btnPin = 2;
-boolean btnPressed = false;
 int fetPin = 3;
 int led1 = 9;
 int led2 = 10;
 int led3 = 11;
+int temp1 = A3;
+int temp2 = A2;
+
 int mode;
 
+int tempThresh;
+
+boolean btnPressed = false;
+
 void setup() {                
-  // initialize the digital pin as an output.
+
   pinMode(btnPin, INPUT);  
   pinMode(fetPin, OUTPUT);  
   pinMode(led1, OUTPUT);  
@@ -32,10 +36,9 @@ void setup() {
   pinMode(led3, OUTPUT);  
 }
 
-// the loop routine runs over and over again forever:
 void loop() {
   //Increment mode on depress, unless mode = 3, then reset to 0
-  if (btnPressed && digitalRead(btnPin) == LOW)
+  if (btnPressed && digitalRead(btnPin) == LOW && analogRead(temp2) < tempThresh && analogRead(temp1) < tempThresh)
     mode = mode == 3 ? 0 : mode + 1;
   //Assign button state
   btnPressed = digitalRead(btnPin);
